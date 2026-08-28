@@ -1,0 +1,32 @@
+name: daily-desk
+on:
+  schedule:
+    - cron: "50 23 * * *"
+  workflow_dispatch:
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    defaults:
+      run:
+        working-directory: DailyDefiV2
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: collect rss + render
+        run: |
+          python3 collect_intake.py || true
+          python3 match_intake.py || true
+          python3 render_desk.py
+          cp desk.html index.html
+      - name: commit
+        run: |
+          git config user.name "depth-bot"
+          git config user.email "depth-bot@users.noreply.github.com"
+          git add index.html desk.html packets archive || true
+          git diff --cached --quiet && echo "no change" && exit 0
+          git commit -m "desk $(date -u +%F)"
+          git push
