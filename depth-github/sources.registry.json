@@ -1,0 +1,71 @@
+{
+  "timezone": "Asia/Seoul",
+  "window": "prev_09:00_to_now",
+  "x_always_on": [
+    {"handle": "DefiIgnas", "role": "discovery", "weight": "medium"},
+    {"handle": "stacy_muur", "role": "discovery", "weight": "medium"},
+    {"handle": "alpha_pls", "role": "discovery", "weight": "medium"},
+    {"handle": "thedefiedge", "role": "discovery", "weight": "medium"},
+    {"handle": "Deebs_DeFi", "role": "discovery", "weight": "medium"},
+    {"handle": "wacy_time1", "role": "interpretation", "weight": "medium"},
+    {"handle": "TheDeFinvestor", "role": "discovery", "weight": "medium"},
+    {"handle": "rektdiomedes", "role": "discovery", "weight": "medium"},
+    {"handle": "hasufl", "role": "counter", "weight": "high"},
+    {"handle": "hosseeb", "role": "thesis", "weight": "high"},
+    {"handle": "ceterispar1bus", "role": "counter", "weight": "high"},
+    {"handle": "jon_charb", "role": "thesis", "weight": "high"},
+    {"handle": "0xngmi", "role": "evidence", "weight": "high"},
+    {"handle": "DeFi_Cheetah", "role": "interpretation", "weight": "high"},
+    {"handle": "Flowslikeosmo", "role": "interpretation", "weight": "high"},
+    {"handle": "LlamaRisk", "role": "evidence", "weight": "high"},
+    {"handle": "gauntlet_xyz", "role": "evidence", "weight": "high"},
+    {"handle": "tarunchitra", "role": "thesis", "weight": "high"},
+    {"handle": "SteakhouseFi", "role": "evidence", "weight": "high"},
+    {"handle": "vaultsfyi", "role": "evidence", "weight": "high"},
+    {"handle": "Tokenomist_ai", "role": "evidence", "weight": "high"},
+    {"handle": "tokenterminal", "role": "evidence", "weight": "high"},
+    {"handle": "DefiLlama", "role": "evidence", "weight": "high"},
+    {"handle": "TheBlockCo", "role": "discovery", "weight": "medium", "note": "The Block official. journal layer on X"}
+  ],
+  "x_hl_always_on": [
+    {"handle": "degennQuant", "role": "interpretation", "note": "800.HL"},
+    {"handle": "RyanWatkins_", "role": "thesis"},
+    {"handle": "Henrik_on_HL", "role": "evidence"},
+    {"handle": "Nick_Researcher", "role": "evidence"},
+    {"handle": "GLC_Research", "role": "research_firm"},
+    {"handle": "HyperliquidR", "role": "research_firm"},
+    {"handle": "smartestxyz", "role": "thesis"},
+    {"handle": "Decentralisedco", "role": "interpretation"}
+  ],
+  "x_hl_keyword_on": [
+    {"handle": "MavenHL", "role": "discovery", "note": "position tape"},
+    {"handle": "crypto_adair", "role": "discovery", "note": "800/pt"},
+    {"handle": "0xOmnia", "role": "discovery"},
+    {"handle": "fiege_max", "role": "discovery"},
+    {"handle": "based16z", "role": "discovery"}
+  ],
+  "x_hl_counter": [
+    {"handle": "Tokenomist_ai", "role": "counter", "note": "unlock calendar"},
+    {"handle": "stacy_muur", "role": "counter", "note": "inflation vs Aster/LIT"},
+    {"handle": "tokenterminal", "role": "counter"},
+    {"handle": "DefiLlama", "role": "counter"},
+    {"handle": "Perps_AI", "role": "counter", "note": "share vs Aster/Lighter"}
+  ],
+  "feeds": [
+    {"id": "ignas", "url": "https://www.ignasdefi.com/feed", "layer": "longform"},
+    {"id": "stacy", "url": "https://stacymuur.substack.com/feed", "layer": "longform"},
+    {"id": "aylo", "url": "https://alphaplease.substack.com/feed", "layer": "longform"},
+    {"id": "a16z-crypto", "url": "https://a16zcrypto.substack.com/feed", "layer": "thesis"},
+    {"id": "multicoin", "url": "https://multicoin.capital/rss.xml", "layer": "thesis"},
+    {"id": "glassnode-insights", "url": "https://insights.glassnode.com/rss/", "layer": "research_firm"},
+    {"id": "artemis-research", "url": "https://research.artemis.xyz/feed", "layer": "research_firm"},
+    {"id": "the-block", "url": "https://www.theblock.co/rss.xml", "layer": "journal"},
+    {"id": "the-defiant", "url": "https://thedefiant.io/feed", "layer": "journal"},
+    {"id": "messari", "url": "https://messari.io/rss", "layer": "research_firm"}
+  ],
+  "data_snapshots": [
+    {"id": "llama-chains", "url": "https://api.llama.fi/v2/chains", "note": "chain TVL snapshot"},
+    {"id": "llama-protocols-sample", "url": "https://api.llama.fi/summary/fees/aave", "note": "Aave fees if needed by issue"},
+    {"id": "llama-stablecoins", "url": "https://stablecoins.llama.fi/stablecoins?includePrices=true", "note": "stablecoin supply"}
+  ]
+}
