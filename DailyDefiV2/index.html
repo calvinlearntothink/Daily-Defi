@@ -27,18 +27,17 @@ h3 { font-size:13px; color:var(--acc); margin:14px 0 6px; }
 ol { padding-left:18px; }
 li { margin:8px 0; line-height:1.55; }
 .src { margin-top:12px; padding-top:10px; border-top:1px solid var(--line); font-size:13px; }
-
-#collect-btn { background:#4d7cff; color:#fff; border:0; border-radius:8px; padding:8px 14px; cursor:pointer; font-weight:650; }
-#prog-steps li.on { color:#8cb4ff; }
-#prog-steps li.done { color:#9aa3ad; text-decoration:line-through; }
 </style>
 </head>
 <body>
 <main>
+<nav>
+  <button type="button" id="b-desk" class="on">오늘</button>
+  <button type="button" id="b-arch">아카이브</button>
+  <button type="button" id="b-raw">원문</button>
+</nav>
 
-  
-
-  <p class="muted">Depth · 2026-08-28 21:40 KST</p>
+  <p class="muted">Depth · 2026-08-28 22:22 KST</p>
   <section class="card">
     <div class="kicker">오늘 마인드셰어</div>
     <h1>누가 오늘 말을 많이 했나</h1>
@@ -90,22 +89,6 @@ li { margin:8px 0; line-height:1.55; }
     <h3>아직</h3><ol><li>10%를 무위험 이자로 보면 안 된다</li></ol>
     <div class="src"><b>출처</b><ol><li><a href="https://x.com/Flowslikeosmo/status/2093021232560218223">Flowslikeosmo</a></li><li><a href="https://x.com/wacy_time1/status/2092913148206432324">Wacy</a></li></ol></div>
     </article>
-<section class="card" id="collect-box">
-    <div class="kicker">수집</div>
-    <p class="muted">9시와 같은 작업. 지금은 진행 화면만. 실제 긁기는 GitHub Action 연결 후.</p>
-    <button type="button" id="collect-btn">지금 수집</button>
-    <div id="prog" class="hidden">
-      <div class="rv"><label><span id="prog-label">대기</span><span id="prog-pct">0%</span></label>
-      <div class="track"><div class="fill" id="prog-fill" style="width:0%"></div></div></div>
-      <ol class="muted" id="prog-steps">
-        <li data-s="x">X 핸들</li>
-        <li data-s="rss">RSS</li>
-        <li data-s="pack">이슈 묶기</li>
-        <li data-s="html">페이지 만들기</li>
-        <li data-s="push">GitHub → Vercel</li>
-      </ol>
-    </div>
-  </section>
 </main>
 <script>
 document.querySelectorAll(".row").forEach(a => {
@@ -117,55 +100,42 @@ document.querySelectorAll(".row").forEach(a => {
     if (t) t.scrollIntoView({behavior:"smooth", block:"start"});
   });
 });
+</script>
 
-
-const btn = document.getElementById("collect-btn");
-async function setProg(label, pct, step) {
-  const box = document.getElementById("prog");
-  if (!box) return;
-  box.classList.remove("hidden");
-  document.getElementById("prog-label").textContent = label;
-  document.getElementById("prog-pct").textContent = pct + "%";
-  document.getElementById("prog-fill").style.width = pct + "%";
-  document.querySelectorAll("#prog-steps li").forEach(el => {
-    el.className = el.dataset.s === step ? "on" : (el.classList.contains("done") ? "done" : "");
-  });
+<section id="v-arch" class="hidden">
+  <h1>아카이브</h1>
+  <p class="muted">이슈만. 원문은 옆 칸.</p>
+  <p class="muted">내일부터 날짜가 쌓인다. 지금은 오늘 이슈 4개.</p>
+</section>
+<section id="v-raw" class="hidden">
+  <h1>원문</h1>
+  <p class="muted">피드에서 긁은 글. 이슈로 안 묶인 것.</p>
+</section>
+<style>
+nav{display:flex;gap:8px;margin-bottom:12px}
+nav button{background:transparent;color:var(--acc);border:1px solid var(--line);border-radius:8px;padding:6px 10px;cursor:pointer}
+nav button.on{background:#1c2430}
+.hidden{display:none}
+</style>
+<script>
+function view(n){
+  const desk=document.getElementById('v-desk');
+  if(!desk){
+    const m=document.querySelector('main');
+    const wrap=document.createElement('div'); wrap.id='v-desk';
+    [...m.children].forEach(ch=>{ if(!['v-arch','v-raw','b-desk'].includes(ch.id) && ch.tagName!=='NAV') wrap.appendChild(ch); });
+    m.insertBefore(wrap, m.querySelector('#v-arch'));
+  }
+  document.getElementById('v-desk')?.classList.toggle('hidden', n!=='desk');
+  document.getElementById('v-arch')?.classList.toggle('hidden', n!=='arch');
+  document.getElementById('v-raw')?.classList.toggle('hidden', n!=='raw');
+  document.getElementById('b-desk')?.classList.toggle('on', n==='desk');
+  document.getElementById('b-arch')?.classList.toggle('on', n==='arch');
+  document.getElementById('b-raw')?.classList.toggle('on', n==='raw');
 }
-if (btn) {
-  btn.onclick = async () => {
-    btn.disabled = true;
-    setProg("시작", 5, "x");
-    let started = false;
-    try {
-      const r = await fetch("/api/refresh", { method: "POST" });
-      const j = await r.json();
-      started = j.ok && j.started;
-      if (j.reason === "missing_gh_pat") {
-        setProg("서버 토큰 없음. Actions에서 Run workflow 하세요", 100, "push");
-        btn.disabled = false;
-        return;
-      }
-    } catch (e) {
-      setProg("API 없음. Actions → daily-desk → Run workflow", 100, "push");
-      btn.disabled = false;
-      return;
-    }
-    if (!started) {
-      setProg("실행 실패. Actions 탭 확인", 100, "push");
-      btn.disabled = false;
-      return;
-    }
-    for (let i=0;i<24;i++) {
-      const s = await fetch("/api/status").then(r=>r.json()).catch(()=>({}));
-      const pct = s.pct || 20;
-      const st = s.state || "in_progress";
-      setProg(st === "completed" ? "완료. 새로고침하면 새 데스크" : "Action 돌아가는 중", pct, pct<40?"x":pct<70?"pack":"push");
-      if (st === "completed") break;
-      await new Promise(r => setTimeout(r, 2500));
-    }
-    btn.disabled = false;
-  };
-}
+document.getElementById('b-desk').onclick=()=>view('desk');
+document.getElementById('b-arch').onclick=()=>view('arch');
+document.getElementById('b-raw').onclick=()=>view('raw');
 </script>
 </body>
 </html>
