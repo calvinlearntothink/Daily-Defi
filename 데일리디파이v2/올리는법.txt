@@ -1,3 +1,0 @@
-depth-github/ 안에 index.html desk.html render_desk.py collect_intake.py match_intake.py sources.registry.json packets/ 넣기
-레포 루트에 .github/workflows/daily.yml 넣기
-Actions 탭에서 워크플로 허용
