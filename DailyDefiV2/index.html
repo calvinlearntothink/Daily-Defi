@@ -13,6 +13,9 @@ h1 { font-size:22px; margin:6px 0 8px; }
 h2 { font-size:18px; margin:0 0 8px; line-height:1.35; }
 h3 { font-size:13px; color:var(--acc); margin:14px 0 6px; }
 .muted { color:var(--muted); font-size:13px; line-height:1.5; }
+nav { display:flex; gap:8px; margin-bottom:14px; flex-wrap:wrap; }
+nav button { background:transparent; color:var(--acc); border:1px solid var(--line); border-radius:8px; padding:6px 10px; cursor:pointer; }
+nav button.on { background:#1c2430; }
 .card { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:14px 16px; margin-top:12px; }
 .kicker { font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--acc); margin-bottom:8px; }
 .rv { margin:10px 0 12px; }
@@ -24,9 +27,11 @@ h3 { font-size:13px; color:var(--acc); margin:14px 0 6px; }
 .num { color:var(--acc); font-weight:700; margin-right:6px; }
 .detail { display:none; }
 .detail.on { display:block; }
+.hidden { display:none; }
 ol { padding-left:18px; }
 li { margin:8px 0; line-height:1.55; }
 .src { margin-top:12px; padding-top:10px; border-top:1px solid var(--line); font-size:13px; }
+.item { padding:12px 0; border-bottom:1px solid var(--line); }
 </style>
 </head>
 <body>
@@ -37,7 +42,7 @@ li { margin:8px 0; line-height:1.55; }
   <button type="button" id="b-raw">원문</button>
 </nav>
 
-  <p class="muted">Depth · 2026-08-28 22:22 KST</p>
+<section id="v-desk">
   <section class="card">
     <div class="kicker">오늘 마인드셰어</div>
     <h1>누가 오늘 말을 많이 했나</h1>
@@ -89,53 +94,106 @@ li { margin:8px 0; line-height:1.55; }
     <h3>아직</h3><ol><li>10%를 무위험 이자로 보면 안 된다</li></ol>
     <div class="src"><b>출처</b><ol><li><a href="https://x.com/Flowslikeosmo/status/2093021232560218223">Flowslikeosmo</a></li><li><a href="https://x.com/wacy_time1/status/2092913148206432324">Wacy</a></li></ol></div>
     </article>
-</main>
-<script>
-document.querySelectorAll(".row").forEach(a => {
-  a.addEventListener("click", e => {
-    e.preventDefault();
-    const id = a.getAttribute("href").slice(1);
-    document.querySelectorAll(".detail").forEach(el => el.classList.toggle("on", el.id===id));
-    const t = document.getElementById(id);
-    if (t) t.scrollIntoView({behavior:"smooth", block:"start"});
-  });
-});
-</script>
+</section>
 
 <section id="v-arch" class="hidden">
   <h1>아카이브</h1>
-  <p class="muted">이슈만. 원문은 옆 칸.</p>
-  <p class="muted">내일부터 날짜가 쌓인다. 지금은 오늘 이슈 4개.</p>
+  <p class="muted">이슈만. 오늘은 4개.</p>
+  <div class="item"><a href="#i-btc" class="arch-link">비트, $64K에서 $80K대까지</a>
+    <div class="muted">2026-08-28 · 이슈 1</div>
+    <p class="muted">사람들이 가장 많이 꼽은 이유는 국채 장기물 바이백이다. ETF가 뒤를 받쳤고 숏이 터지면서 속도가 붙었다.</p></div><div class="item"><a href="#i-ethena" class="arch-link">Ethena, 토큰 권리를 다시 짜고 바이백을 걸다</a>
+    <div class="muted">2026-08-28 · 이슈 2</div>
+    <p class="muted">ENA는 발표 당일 대략 $0.15에서 $0.17로 올랐다. 바이백 자체는 아직 안 돌아간다.</p></div><div class="item"><a href="#i-hype" class="arch-link">HYPE, 바이백 켜지고 신고가 — 앞에 언락</a>
+    <div class="muted">2026-08-28 · 이슈 3</div>
+    <p class="muted">AQAv2 이후 $84대까지 갔다. 8월 29일 약 12억 달러 규모 언락이 남았다.</p></div><div class="item"><a href="#i-stables" class="arch-link">스테이블 이자가 다시 갈린다</a>
+    <div class="muted">2026-08-28 · 이슈 4</div>
+    <p class="muted">숫자만 놓고 비교하면 안 된다. 이자가 어디서 나오는지가 다르다.</p></div>
 </section>
 <section id="v-raw" class="hidden">
   <h1>원문</h1>
-  <p class="muted">피드에서 긁은 글. 이슈로 안 묶인 것.</p>
+  <p class="muted">피드에서 긁은 글.</p>
+  <div class="item"><a href="https://a16zcrypto.substack.com/p/beyond-slop-taste-and-ai-moral-panic">Beyond slop, taste, and AI moral panic: What social science tells us</a>
+        <div class="muted">2026-08-27 · thesis</div>
+        <p class="muted">Taste is learned. What happens when AI changes the conditions that create it?</p></div><div class="item"><a href="https://research.glassnode.com/the-week-onchain-week-34-2026/">Squeeze into Supply</a>
+        <div class="muted">2026-08-26 · research_firm</div>
+        <p class="muted">A record short liquidation event ignited a 26% rally off the mid-August low, and real money paid for it: the strongest ETF intake of the year, coins leaving exchanges, every cohort accumulating. What stands between this </p></div><div class="item"><a href="https://research.artemis.ai/p/analyst-of-the-month-david-kroger">Analyst of the Month: David Kroger</a>
+        <div class="muted">2026-08-27 · research_firm</div>
+        <p class="muted">This month we highlight one of the leading minds in digital asset research; an esteemed investor and data analyst that takes a quantimental approach to building long-term digital asset portfolios.</p></div><div class="item"><a href="https://www.theblock.co/news/regulation/2026-08-27-bithumb-wins-lawsuit-btc-412893">Bithumb wins lawsuit over proceeds from 620,000 BTC fat-finger error: report</a>
+        <div class="muted">2026-08-27 · journal</div>
+        <p class="muted">In February, the South Korean exchange accidentally credited 620,000 BTC (then worth around $43 billion) internally to hundreds of users.</p></div><div class="item"><a href="https://www.theblock.co/news/business/2026-08-27-mirae-asset-109-billion-digital-asset-push-412883">Mirae Asset maps out $109 billion digital asset push with Digital X: report</a>
+        <div class="muted">2026-08-27 · journal</div>
+        <p class="muted">South Korea&#x27;s Mirae Asset targets a $109 billion digital asset business around Digital X, aiming for profitability by 2027.</p></div><div class="item"><a href="https://www.theblock.co/news/markets/2026-08-27-bitcoin-faces-key-hurdle-81000-86000-412876">Bitcoin faces key hurdle in $81,000-$86,000 range to reach January high, analyst says</a>
+        <div class="muted">2026-08-27 · journal</div>
+        <p class="muted">Glassnode views $81,000–$86,000 as the wall, as that is where a large group of long-term holders sits near breakeven, among other factors.</p></div><div class="item"><a href="https://www.theblock.co/news/regulation/2026-08-27-connecticut-sues-kalshi-412870">Connecticut sues Kalshi over sports event contracts in months-long legal feud</a>
+        <div class="muted">2026-08-27 · journal</div>
+        <p class="muted">Kalshi Head of Litigation Jovy Dedaj calls the move &#x27;arbitrary and inconsistent enforcement,&#x27; as other platforms continue to operate there.</p></div><div class="item"><a href="https://www.theblock.co/news/defi/2026-08-26-first-quantum-resistant-bitcoin-transaction-starkware-412863">First quantum-resistant Bitcoin transaction successfully executed, StarkWare says</a>
+        <div class="muted">2026-08-27 · journal</div>
+        <p class="muted">Still, StarkWare says Bitcoin needs a protocol-level upgrade to make it fully safe from quantum computing threats.</p></div><div class="item"><a href="https://www.theblock.co/news/regulation/2026-08-26-hyperliquid-policy-center-tradexyz-urges-cftc-create-path-us-oil-perpetuals-412834">Hyperliquid Policy Center, TradeXYZ urge CFTC to create path for US oil perpetuals</a>
+        <div class="muted">2026-08-27 · journal</div>
+        <p class="muted">The CFTC should adopt a regulatory framework for energy perpetual contracts, the Hyperliquid Policy Center and TradeXYZ said in a letter.</p></div><div class="item"><a href="https://www.theblock.co/news/markets/2026-08-26-cryptoquant-bitcoin-bull-market-83000-official-confirmation-412822">CryptoQuant says bitcoin has entered bull market but needs to cross $83,000 for ‘official’ confirmation</a>
+        <div class="muted">2026-08-27 · journal</div>
+        <p class="muted">&quot;Historically, bitcoin&#x27;s bull markets have &#x27;officially&#x27; begun when price crosses above its 365-day moving average,&quot; CryptoQuant said.</p></div><div class="item"><a href="https://www.theblock.co/news/business/2026-08-26-coinbase-better-make-token-backed-mortgages-generally-available-412810">Coinbase, Better make token-backed mortgages generally available</a>
+        <div class="muted">2026-08-27 · journal</div>
+        <p class="muted">Coinbase and Better expand token-backed mortgage access to Coinbase One members, with a 1% closing-cost credit now available.</p></div><div class="item"><a href="https://www.theblock.co/news/regulation/2026-08-26-sec-sends-crypto-custody-rule-changes-to-white-house-for-review-412811">SEC sends crypto custody rule changes to White House for review</a>
+        <div class="muted">2026-08-26 · journal</div>
+        <p class="muted">A proposal from the SEC to change its rules governing how investment advisers hold digital assets was sent this week to the White House.</p></div><div class="item"><a href="https://www.theblock.co/news/markets/2026-08-26-sol-treasury-firm-defi-development-launches-real-time-state-of-solana-intelligence-platform-412798">SOL treasury firm DeFi Development launches real-time ‘State of Solana’ intelligence platform</a>
+        <div class="muted">2026-08-26 · journal</div>
+        <p class="muted">The Nasdaq-listed company holds roughly 2.3 million SOL worth about $208 million, while its shares have fallen 16% year to date.</p></div><div class="item"><a href="https://www.theblock.co/news/markets/2026-08-26-altitude-sickness-can-wait-bitcoins-historic-short-squeeze-bessent-catalyst-may-signal-bull-market-reset-analysts-say-412785">‘Altitude sickness can wait’: Bitcoin’s historic short squeeze, Bessent catalyst may signal bull-market reset, analysts say</a>
+        <div class="muted">2026-08-26 · journal</div>
+        <p class="muted">Bitwise CIO Matt Hougan said Treasury Secretary Scott Bessent&#x27;s recent actions provide an additional macro catalyst.</p></div><div class="item"><a href="https://www.theblock.co/news/markets/2026-08-26-bernstein-sees-bitcoin-reaching-150000-by-mid-2027-amid-debasement-trade-but-cuts-strategy-target-to-350-412778">Bernstein sees bitcoin reaching $150,000 by mid-2027 amid ‘debasement trade,’ but cuts Strategy target to $350</a>
+        <div class="muted">2026-08-26 · journal</div>
+        <p class="muted">Bernstein expects bitcoin to reach $150,000 by mid-2027 in its base case, before reaching a cycle peak of around $300,000 in 2029.</p></div><div class="item"><a href="https://www.theblock.co/news/business/2026-08-26-revolut-begins-phased-eurr-stablecoin-rollout-in-denmark-poland-and-portugal-412772">Revolut begins phased EURR stablecoin rollout in Denmark, Poland and Portugal</a>
+        <div class="muted">2026-08-26 · journal</div>
+        <p class="muted">Revolut began rolling out EURR, its first euro-pegged stablecoin, to customers in Denmark, Poland, and Portugal.</p></div><div class="item"><a href="https://www.theblock.co/news/web3/2026-08-26-south-koreas-shinhan-visa-stablecoin-412765">South Korea’s Shinhan to use Visa’s stablecoin platform for ‘future finance’ initiatives</a>
+        <div class="muted">2026-08-26 · journal</div>
+        <p class="muted">The two will also test the application of stablecoins in card payments, AI-based future payment models, and B2B and B2C payment businesses.</p></div><div class="item"><a href="https://www.theblock.co/news/regulation/2026-08-26-tornado-cash-roman-storm-retrial-april-2027-412761">Tornado Cash developer Roman Storm’s retrial pushed back to April 2027</a>
+        <div class="muted">2026-08-26 · journal</div>
+        <p class="muted">A jury convicted Storm on a count of money transmitting last year, but did not reach a verdict on other charges.</p></div><div class="item"><a href="https://www.theblock.co/news/regulation/2026-08-26-japan-blockchain-stock-settlement-system-412755">Japan to work on blockchain-based stock settlement system, details expected early 2027: Nikkei</a>
+        <div class="muted">2026-08-26 · journal</div>
+        <p class="muted">If the plan is approved, the agencies could launch the system within a few years, and fully operational in the early 2030s.</p></div><div class="item"><a href="https://www.theblock.co/news/web3/2026-08-26-kalshi-latest-form-d-412749">Kalshi raised $1.12 billion via private equity offering since April, latest SEC filing shows</a>
+        <div class="muted">2026-08-26 · journal</div>
+        <p class="muted">It was reported earlier this month that Kalshi is looking to raise $750 million in fresh capital at a $40 billion valuation.</p></div><div class="item"><a href="https://www.theblock.co/news/business/2026-08-25-rockawayx-relayer-capital-412743">RockawayX acquires Relayer Capital to expand crypto offerings in US</a>
+        <div class="muted">2026-08-26 · journal</div>
+        <p class="muted">Relayer will become the RockawayX Liquid Opportunities Fund, identifying &#x27;undervalued liquid tokens and crypto-related equities.&#x27;</p></div><div class="item"><a href="https://thedefiant.io/news/defi/aave-opens-ios-early-access-keeps-android-and-web-waitlisted">Aave Opens iOS Early Access, Keeps Android and Web Waitlisted</a>
+        <div class="muted">2026-08-27 · journal</div>
+        <p class="muted">The savings app supports bank and stablecoin deposits; a July proposal described swaps and foreign exchange as additions planned for 2026.</p></div><div class="item"><a href="https://thedefiant.io/converge/tradfi-and-fintech/39-state-banking-groups-form-bankchain-alliance-for-2027-blockchain-launch">39 State Banking Groups Form BankChain Alliance for 2027 Blockchain Launch</a>
+        <div class="muted">2026-08-27 · journal</div>
+        <p class="muted">The industry-owned network is still selecting a technology partner and would support tokenized deposits, stablecoins, smart payments and automated settlement.</p></div><div class="item"><a href="https://thedefiant.io/news/security/core-lightning-tells-node-operators-to-go-offline-with-no-patch-published">Core Lightning Tells Node Operators To Go Offline, With No Patch Published</a>
+        <div class="muted">2026-08-27 · journal</div>
+        <p class="muted">The CLN team said operators who don’t upgrade should run their nodes --offline, but the fixed binaries aren’t out yet and the details of what they fix are under a two-week embargo.</p></div><div class="item"><a href="https://thedefiant.io/news/nfts-and-web3/unstoppable-skips-icann-round-refunds-web3-domains">Unstoppable Skips ICANN Round, Refunds Web3 Domains</a>
+        <div class="muted">2026-08-27 · journal</div>
+        <p class="muted">Founder Matthew Gould said the cost of taking web3 strings through ICANN was higher than what the company expected to recover in sales, six months after telling customers it would apply for all six of its original extens</p></div>
 </section>
-<style>
-nav{display:flex;gap:8px;margin-bottom:12px}
-nav button{background:transparent;color:var(--acc);border:1px solid var(--line);border-radius:8px;padding:6px 10px;cursor:pointer}
-nav button.on{background:#1c2430}
-.hidden{display:none}
-</style>
+</main>
 <script>
-function view(n){
-  const desk=document.getElementById('v-desk');
-  if(!desk){
-    const m=document.querySelector('main');
-    const wrap=document.createElement('div'); wrap.id='v-desk';
-    [...m.children].forEach(ch=>{ if(!['v-arch','v-raw','b-desk'].includes(ch.id) && ch.tagName!=='NAV') wrap.appendChild(ch); });
-    m.insertBefore(wrap, m.querySelector('#v-arch'));
-  }
-  document.getElementById('v-desk')?.classList.toggle('hidden', n!=='desk');
-  document.getElementById('v-arch')?.classList.toggle('hidden', n!=='arch');
-  document.getElementById('v-raw')?.classList.toggle('hidden', n!=='raw');
-  document.getElementById('b-desk')?.classList.toggle('on', n==='desk');
-  document.getElementById('b-arch')?.classList.toggle('on', n==='arch');
-  document.getElementById('b-raw')?.classList.toggle('on', n==='raw');
+function view(n) {
+  document.getElementById("v-desk").classList.toggle("hidden", n!=="desk");
+  document.getElementById("v-arch").classList.toggle("hidden", n!=="arch");
+  document.getElementById("v-raw").classList.toggle("hidden", n!=="raw");
+  document.getElementById("b-desk").classList.toggle("on", n==="desk");
+  document.getElementById("b-arch").classList.toggle("on", n==="arch");
+  document.getElementById("b-raw").classList.toggle("on", n==="raw");
 }
-document.getElementById('b-desk').onclick=()=>view('desk');
-document.getElementById('b-arch').onclick=()=>view('arch');
-document.getElementById('b-raw').onclick=()=>view('raw');
+document.getElementById("b-desk").onclick=()=>view("desk");
+document.getElementById("b-arch").onclick=()=>view("arch");
+document.getElementById("b-raw").onclick=()=>view("raw");
+document.querySelectorAll("#v-desk .row").forEach(a => {
+  a.addEventListener("click", e => {
+    e.preventDefault();
+    const id=a.getAttribute("href").slice(1);
+    document.querySelectorAll(".detail").forEach(el=>el.classList.toggle("on", el.id===id));
+    document.getElementById(id)?.scrollIntoView({behavior:"smooth", block:"start"});
+  });
+});
+document.querySelectorAll(".arch-link").forEach(a => {
+  a.addEventListener("click", e => {
+    e.preventDefault();
+    view("desk");
+    const id=a.getAttribute("href").slice(1);
+    document.querySelectorAll(".detail").forEach(el=>el.classList.toggle("on", el.id===id));
+    document.getElementById(id)?.scrollIntoView({behavior:"smooth", block:"start"});
+  });
+});
 </script>
 </body>
 </html>
